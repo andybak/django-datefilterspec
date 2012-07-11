@@ -19,12 +19,10 @@ class DateForm(forms.Form):
         super(DateForm, self).__init__(*args, **kwargs)
         self.fields['%s__gte' % field_name ] = forms.DateField(label=(_('From')),
                                       widget=AdminDateWidget,
-                                      required=False,
-                                      input_formats=['%Y-%m-%d'])
+                                      required=False)
         self.fields['%s__lte' % field_name ] = forms.DateField(label=(_('To')),
                                       widget=AdminDateWidget,
-                                      required=False,
-                                      input_formats=['%Y-%m-%d'])
+                                      required=False)
         for k in kwargs.get('initial',{}):
             if not self.fields.has_key(k):
                 self.fields[k] = forms.CharField(widget=forms.HiddenInput())
