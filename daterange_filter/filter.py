@@ -17,12 +17,17 @@ class DateForm(forms.Form):
     def __init__(self, *args, **kwargs):
         field_name = kwargs.pop('field_name')
         super(DateForm, self).__init__(*args, **kwargs)
-        self.fields['%s__gte' % field_name ] = forms.DateField(label=(_('From')),
-                                      widget=AdminDateWidget,
-                                      required=False)
-        self.fields['%s__lte' % field_name ] = forms.DateField(label=(_('To')),
-                                      widget=AdminDateWidget,
-                                      required=False)
+        # TODO: Use of translation functions...
+        self.fields['%s__gte' % field_name ] = forms.DateField(
+            label='',
+            widget=AdminDateWidget(attrs={'style': 'width: 95%', 'value': 'Von'}),
+            required=False
+        )
+        self.fields['%s__lte' % field_name ] = forms.DateField(
+            label='',
+            widget=AdminDateWidget(attrs={'style': 'width: 95%', 'value': 'Bis'}),
+            required=False
+        )
         for k in kwargs.get('initial',{}):
             if not self.fields.has_key(k):
                 self.fields[k] = forms.CharField(widget=forms.HiddenInput())
@@ -52,7 +57,7 @@ class DateFilterSpec(admin.filters.DateFieldListFilter):
         <form method="GET" action="">
         <ul>
         %(form)s
-        <li> <input type="submit" value="%(search)s"> </li>
+        <li> <input class='btn' type="submit" value="%(search)s"> </li>
         </ul>
         </form>
         """ % {'search':_('Search'),
@@ -61,6 +66,7 @@ class DateFilterSpec(admin.filters.DateFieldListFilter):
                'admin_media': settings.STATIC_URL,
                'field_name': self.field.verbose_name,
             }
+        # Hardcoded Twitter Bootstrap CSS class
         return mark_safe(out)
 
 
