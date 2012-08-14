@@ -20,12 +20,12 @@ class DateForm(forms.Form):
         # TODO: Use of translation functions...
         self.fields['%s__gte' % field_name ] = forms.DateField(
             label='',
-            widget=AdminDateWidget(attrs={'style': 'width: 95%', 'value': 'Von'}),
+            widget=AdminDateWidget(attrs={'style': 'width: 95%', 'placeholder': 'Start Date'}),
             required=False
         )
         self.fields['%s__lte' % field_name ] = forms.DateField(
             label='',
-            widget=AdminDateWidget(attrs={'style': 'width: 95%', 'value': 'Bis'}),
+            widget=AdminDateWidget(attrs={'style': 'width: 95%', 'placeholder': 'Finish Finish'}),
             required=False
         )
         for k in kwargs.get('initial',{}):
