@@ -48,17 +48,39 @@ class DateFilterSpec(admin.filters.DateFieldListFilter):
     def _title(self):
         form = DateForm(initial=self.date_params, field_name=self.field.name)
         out =  u"""%(field_name)s
+        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.min.js"></script>
+        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/themes/smoothness/jquery-ui.css">
+
+        <script type="text/javascript">
+          $(function() {
+              $(".vDateField" ).datepicker();
+            });
+        </script>
         <style>
             .calendarbox {
                 left:-400 !important;
                 z-index:1100;
-        }
+            }
+            #datepicker p{
+             padding: 0;
+             margin-bottom: 0;
+            }
+            #datepicker label{
+              display: inline-block;
+              line-height: 23px; 
+            }
+            #datepicker input{
+              float: right;
+            }
+            #dsubmit{
+                clear:both;
+            }
         </style>
-        <form method="GET" action="">
-        <ul>
+        <form method="GET" action="" id="datepicker">
+        
         %(form)s
-        <li> <input class='btn' type="submit" value="%(search)s"> </li>
-        </ul>
+        <input type="submit" value="%(search)s" id="dsubmit">
         </form>
         """ % {'search':_('Search'),
                'form_media': form.media,
