@@ -1,3 +1,10 @@
+DEPRECATED
+==========
+
+The PyPi version is based on https://github.com/DXist/django-daterange-filter
+
+Please use that.
+
 django-datefilterspec
 =====================
 
